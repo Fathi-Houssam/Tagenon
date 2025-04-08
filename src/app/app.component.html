@@ -1,0 +1,206 @@
+<div class="top-bar">
+  <div class="logo">MySiteLogo</div>
+  <div class="contact-info">Contact: info.com</div>
+</div>
+
+<div>
+  <canvas id="canvas"></canvas>
+</div>
+
+<div class="toolkit-main">
+  <div class="carousel-container">
+    <div class="customization-options">
+      <div class="parameter-choice">
+        <h2 class="carousel-title new-content" (click)="sliderView()" [ngClass]="{'grayouttext':activeView !=='slider'}">Size</h2>
+        <h2 class="carousel-title new-content" (click)="textureView()" [ngClass]="{'grayouttext':activeView !=='texture'}">Texture</h2>
+        <h2 class="carousel-title new-content" (click)="stickersView()" [ngClass]="{'grayouttext':activeView !=='stickers'}">Stickers</h2>
+      </div>
+      <div class="closeup-box" [ngClass]="{'hidden': activeView !== 'slider'}">
+        <div class="slider-wrapper">
+          <div class="value-display">Size: {{ size }}cm</div>
+          <input
+            type="range"
+            id="sizeSlider"
+            class="slider"
+            [min]="15"
+            [max]="40"
+            [(ngModel)]="size"
+            (ngModelChange)="resizeModelToRealWorldDiameter(size)"
+          />
+        </div>
+      </div>
+      <div class="texture-wrapper" [ngClass]="{'hidden': activeView !== 'texture'}">
+        <div class="texture-items">
+          <div class="carousel-box" (click)="applyTextureToModel('https://aakaar.s3.ap-south-1.amazonaws.com/textures/floral/1/thumbnail_1.webp')">
+            <div
+              class="image-placeholder"
+              [ngStyle]="{'background-image': 'url(https://aakaar.s3.ap-south-1.amazonaws.com/textures/floral/1/thumbnail_1.webp)'}">
+
+            </div>
+            <div class="box-label">Neonic Flower</div>
+          </div>
+          <div class="carousel-box" (click)="applyTextureToModel('https://aakaar.s3.ap-south-1.amazonaws.com/textures/floral/2/thumbnail_2.webp')">
+            <div
+              class="image-placeholder"
+              [ngStyle]="{'background-image': 'url(https://aakaar.s3.ap-south-1.amazonaws.com/textures/floral/2/thumbnail_2.webp)'}">
+            </div>
+            <div class="box-label">Yellow Dandelion</div>
+          </div>
+          <div class="carousel-box" (click)="applyTextureToModel('https://aakaar.s3.ap-south-1.amazonaws.com/textures/floral/3/thumbnail_3.webp')">
+            <div
+              class="image-placeholder"
+              [ngStyle]="{'background-image': 'url(https://aakaar.s3.ap-south-1.amazonaws.com/textures/floral/3/thumbnail_3.webp)'}">
+            </div>
+            <div class="box-label">Sunflower</div>
+          </div>
+          <div class="carousel-box" (click)="applyTextureToModel('https://aakaar.s3.ap-south-1.amazonaws.com/textures/floral/9/thumbnail_9.webp')">
+            <div
+              class="image-placeholder"
+              [ngStyle]="{'background-image': 'url(https://aakaar.s3.ap-south-1.amazonaws.com/textures/floral/9/thumbnail_9.webp)'}">
+            </div>
+            <div class="box-label">Cherry</div>
+          </div>
+          <div class="carousel-box" (click)="applyTextureToModel('https://aakaar.s3.ap-south-1.amazonaws.com/textures/floral/5/thumbnail_5.webp')">
+            <div
+              class="image-placeholder"
+              [ngStyle]="{'background-image': 'url(https://aakaar.s3.ap-south-1.amazonaws.com/textures/floral/5/thumbnail_5.webp)'}">
+            </div>
+            <div class="box-label">Neonic Rose</div>
+          </div>
+          <div class="carousel-box" (click)="applyTextureToModel('https://aakaar.s3.ap-south-1.amazonaws.com/textures/floral/6/thumbnail_6.webp')">
+            <div
+              class="image-placeholder"
+              [ngStyle]="{'background-image': 'url(https://aakaar.s3.ap-south-1.amazonaws.com/textures/floral/6/thumbnail_6.webp)'}">
+            </div>
+            <div class="box-label">Chinese Festival</div>
+          </div>
+          <div class="carousel-box" (click)="applyTextureToModel('https://aakaar.s3.ap-south-1.amazonaws.com/textures/floral/7/thumbnail_7.webp')">
+            <div
+              class="image-placeholder"
+              [ngStyle]="{'background-image': 'url(https://aakaar.s3.ap-south-1.amazonaws.com/textures/floral/7/thumbnail_7.webp)'}">
+            </div>
+            <div class="box-label">Japanese Festival</div>
+          </div>
+          <div class="carousel-box" (click)="applyTextureToModel('https://aakaar.s3.ap-south-1.amazonaws.com/textures/floral/8/thumbnail_8.webp')">
+            <div
+              class="image-placeholder"
+              [ngStyle]="{'background-image': 'url(https://aakaar.s3.ap-south-1.amazonaws.com/textures/floral/8/thumbnail_8.webp)'}">
+            </div>
+            <div class="box-label">Leaves</div>
+          </div>
+          <div class="carousel-box">
+            <div
+              class="image-placeholder" id="specialeone" (click)="triggerFileInput()"
+              [ngStyle]="{'background-image': 'url(https://res.cloudinary.com/dqklkultc/image/upload/v1744031502/plus_tedhky.png)'}">
+            </div>
+            <div class="box-label">Custom</div>
+            <input id="textureinput" type="file" hidden accept="image/*" (change)="onTextureUpload($event)" >
+
+          </div>
+        </div>
+      </div>
+      <div class="stickers-wrapper" [ngClass]="{'hidden': activeView !== 'stickers'}">
+        <div class="stickers-items">
+          <div class="carousel-box" (click)="applyDecalFromSticker('https://aakaar.s3.ap-south-1.amazonaws.com/textures/sticker/2/thumbnail_2.jpg')">
+            <div
+              class="image-placeholder"
+              [ngStyle]="{'background-image': 'url(https://aakaar.s3.ap-south-1.amazonaws.com/textures/sticker/2/thumbnail_2.jpg)'}">
+            </div>
+            <div class="box-label">Antelope</div>
+          </div>
+          <div class="carousel-box" (click)="applyDecalFromSticker('https://aakaar.s3.ap-south-1.amazonaws.com/textures/sticker/3/thumbnail_3.jpg')">
+            <div
+              class="image-placeholder"
+              [ngStyle]="{'background-image': 'url(https://aakaar.s3.ap-south-1.amazonaws.com/textures/sticker/3/thumbnail_3.jpg)'}">
+            </div>
+            <div class="box-label">Bear</div>
+          </div>
+          <div class="carousel-box" (click)="applyDecalFromSticker('https://aakaar.s3.ap-south-1.amazonaws.com/textures/sticker/4/thumbnail_4.jpg')">
+            <div
+              class="image-placeholder"
+              [ngStyle]="{'background-image': 'url(https://aakaar.s3.ap-south-1.amazonaws.com/textures/sticker/4/thumbnail_4.jpg)'}">
+            </div>
+            <div class="box-label">Buffalo</div>
+          </div>
+          <div class="carousel-box" (click)="applyDecalFromSticker('https://aakaar.s3.ap-south-1.amazonaws.com/textures/sticker/5/thumbnail_5.jpg')">
+            <div
+              class="image-placeholder"
+              [ngStyle]="{'background-image': 'url(https://aakaar.s3.ap-south-1.amazonaws.com/textures/sticker/5/thumbnail_5.jpg)'}">
+            </div>
+            <div class="box-label">Leopard</div>
+          </div>
+          <div class="carousel-box" (click)="applyDecalFromSticker('https://aakaar.s3.ap-south-1.amazonaws.com/textures/sticker/6/thumbnail_6.jpg')">
+            <div
+              class="image-placeholder"
+              [ngStyle]="{'background-image': 'url(https://aakaar.s3.ap-south-1.amazonaws.com/textures/sticker/6/thumbnail_6.jpg)'}">
+            </div>
+            <div class="box-label">Cow</div>
+          </div>
+          <div class="carousel-box" (click)="applyDecalFromSticker('https://aakaar.s3.ap-south-1.amazonaws.com/textures/sticker/7/thumbnail_7.jpg')">
+            <div
+              class="image-placeholder"
+              [ngStyle]="{'background-image': 'url(https://aakaar.s3.ap-south-1.amazonaws.com/textures/sticker/7/thumbnail_7.jpg)'}">
+            </div>
+            <div class="box-label">Crocodile</div>
+          </div>
+          <div class="carousel-box" (click)="applyDecalFromSticker('https://aakaar.s3.ap-south-1.amazonaws.com/textures/sticker/8/thumbnail_8.jpg')">
+            <div
+              class="image-placeholder"
+              [ngStyle]="{'background-image': 'url(https://aakaar.s3.ap-south-1.amazonaws.com/textures/sticker/8/thumbnail_8.jpg)'}">
+            </div>
+            <div class="box-label">Alligator</div>
+          </div>
+          <div class="carousel-box" (click)="applyDecalFromSticker('https://aakaar.s3.ap-south-1.amazonaws.com/textures/sticker/9/thumbnail_9.jpg')">
+            <div
+              class="image-placeholder"
+              [ngStyle]="{'background-image': 'url(https://aakaar.s3.ap-south-1.amazonaws.com/textures/sticker/9/thumbnail_9.jpg)'}">
+            </div>
+            <div class="box-label">Flamingo</div>
+          </div>
+          <div class="carousel-box" (click)="triggerDecalInput()">
+            <div
+              class="image-placeholder"
+              [ngStyle]="{'background-image': 'url(https://res.cloudinary.com/dqklkultc/image/upload/v1744031502/plus_tedhky.png)'}">
+            </div>
+            <div class="box-label">Custom</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="carousel-content">
+      <h2 class="carousel-title">What would you like to customize?</h2>
+      <div class="carousel-items">
+        <div class="carousel-box" (click)="handleSelect('plate-lid');restoreOriginalView()">
+          <div
+            class="image-placeholder"
+            [ngStyle]="{'background-image': 'url(https://res.cloudinary.com/dqklkultc/image/upload/v1744030877/Screenshot_2025-04-07_140032_ezxk4k.png)'}">
+          </div>
+          <div class="box-label">Plate+Lid</div>
+        </div>
+        <div class="carousel-box" (click)="handleSelect('lid');LidView()">
+          <div
+            class="image-placeholder"
+            [ngStyle]="{'background-image': 'url(https://res.cloudinary.com/dqklkultc/image/upload/v1744030875/Screenshot_2025-04-07_140044_c03zv7.png)'}">
+          </div>
+          <div class="box-label">Lid</div>
+        </div>
+        <div class="carousel-box" (click)="handleSelect('plate');plateView()">
+          <div
+            class="image-placeholder"
+            [ngStyle]="{'background-image': 'url(https://res.cloudinary.com/dqklkultc/image/upload/v1744030873/Screenshot_2025-04-07_140055_nkacax.png)'}">
+          </div>
+          <div class="box-label">Plate</div>
+          <input type="file" id="decaleApply" hidden accept="image/*" (change)="onDecalUpload($event)" />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+

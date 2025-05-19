@@ -1,6 +1,6 @@
 # TESTING
 
-Please Wait a few seconds for the models to load.
+Check this project over at https://blue-cliff-0163a9403.6.azurestaticapps.net, also please wait a few seconds for the models to load.
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.1.4.
 

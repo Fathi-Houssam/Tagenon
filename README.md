@@ -1,4 +1,4 @@
-# TESTING
+# Tagenon
 
 Check this project over at https://blue-cliff-0163a9403.6.azurestaticapps.net, also please wait a few seconds for the models to load.
 
